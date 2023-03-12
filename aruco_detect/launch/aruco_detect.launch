@@ -1,10 +1,10 @@
 <!-- Run the aruco_detect node -->
 <launch>
   <!-- namespace for camera input -->
-  <arg name="camera" default="/raspicam_node"/>
-  <arg name="image" default="image"/>
+  <arg name="camera" default="/usb_cam"/>
+  <arg name="image" default="image_raw"/>
   <arg name="transport" default="compressed"/>
-  <arg name="fiducial_len" default="0.14"/>
+  <arg name="fiducial_len" default="0.1008"/>
   <arg name="dictionary" default="7"/>
   <arg name="do_pose_estimation" default="true"/>
   <!-- If vis_msgs set to true, pose estimation will be published with ROS standard vision_msgs -->
