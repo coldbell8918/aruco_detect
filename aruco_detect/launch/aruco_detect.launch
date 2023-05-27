@@ -1,7 +1,7 @@
 <!-- Run the aruco_detect node -->
 <launch>
   <!-- namespace for camera input -->
-  <arg name="camera" default="/usb_cam"/>
+  <arg name="camera" default="/ardrone"/>
   <arg name="image" default="image_raw"/>
   <arg name="transport" default="compressed"/>
   <arg name="fiducial_len" default="0.1008"/>
