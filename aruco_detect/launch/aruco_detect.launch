@@ -1,7 +1,9 @@
 <!-- Run the aruco_detect node -->
 <launch>
   <!-- namespace for camera input -->
-  <arg name="camera" default="/ardrone"/>
+  <arg name="camera1" default="/ardrone"/>
+  <arg name="camera2" default="/left_camera"/>
+  <arg name="camera3" default="/right_camera"/>
   <arg name="image" default="image_raw"/>
   <arg name="transport" default="compressed"/>
   <arg name="fiducial_len" default="0.1008"/>
@@ -13,7 +15,7 @@
   <arg name="fiducial_len_override" default="" />
   <arg name="verbose" default="false"/>
 
-  <node pkg="aruco_detect" name="aruco_detect"
+  <node pkg="aruco_detect" name="drone_aruco_detect"
     type="aruco_detect" output="screen" respawn="false">
     <param name="image_transport" value="$(arg transport)"/>
     <param name="publish_images" value="true" />
@@ -25,7 +27,40 @@
     <param name="fiducial_len_override" value="$(arg fiducial_len_override)"/>
     <param name="verbose" value="$(arg verbose)"/>
     <remap from="camera/compressed" 
-        to="$(arg camera)/$(arg image)/$(arg transport)"/>
-    <remap from="camera_info" to="$(arg camera)/camera_info"/>
+        to="$(arg camera1)/$(arg image)/$(arg transport)"/>
+    <remap from="camera_info" to="$(arg camera1)/camera_info"/>
   </node>
+
+  <node pkg="aruco_detect" name="left_aruco_detect"
+    type="aruco_detect" output="screen" respawn="false">
+    <param name="image_transport" value="$(arg transport)"/>
+    <param name="publish_images" value="true" />
+    <param name="fiducial_len" value="$(arg fiducial_len)"/>
+    <param name="dictionary" value="3"/>
+    <param name="do_pose_estimation" value="$(arg do_pose_estimation)"/>
+    <param name="vis_msgs" value="$(arg vis_msgs)"/>
+    <param name="ignore_fiducials" value="$(arg ignore_fiducials)"/>
+    <param name="fiducial_len_override" value="$(arg fiducial_len_override)"/>
+    <param name="verbose" value="$(arg verbose)"/>
+    <remap from="camera/compressed" 
+        to="$(arg camera2)/$(arg image)/$(arg transport)"/>
+    <remap from="camera_info" to="$(arg camera2)/camera_info"/>
+  </node>
+
+  <node pkg="aruco_detect" name="right_aruco_detect"
+    type="aruco_detect" output="screen" respawn="false">
+    <param name="image_transport" value="$(arg transport)"/>
+    <param name="publish_images" value="true" />
+    <param name="fiducial_len" value="$(arg fiducial_len)"/>
+    <param name="dictionary" value="11"/>
+    <param name="do_pose_estimation" value="$(arg do_pose_estimation)"/>
+    <param name="vis_msgs" value="$(arg vis_msgs)"/>
+    <param name="ignore_fiducials" value="$(arg ignore_fiducials)"/>
+    <param name="fiducial_len_override" value="$(arg fiducial_len_override)"/>
+    <param name="verbose" value="$(arg verbose)"/>
+    <remap from="camera/compressed" 
+        to="$(arg camera3)/$(arg image)/$(arg transport)"/>
+    <remap from="camera_info" to="$(arg camera3)/camera_info"/>
+  </node>
+
 </launch>
