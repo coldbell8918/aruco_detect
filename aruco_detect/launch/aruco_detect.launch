@@ -4,7 +4,7 @@
   <arg name="camera1" default="/ardrone"/>
   <arg name="camera2" default="/left_camera"/>
   <arg name="camera3" default="/right_camera"/>
-  <arg name="image" default="image_raw"/>
+  <arg name="image" default="color/image_raw"/>
   <arg name="transport" default="compressed"/>
   <arg name="fiducial_len" default="0.1008"/>
   <arg name="dictionary" default="7"/>
@@ -15,7 +15,7 @@
   <arg name="fiducial_len_override" default="" />
   <arg name="verbose" default="false"/>
 
-  <node pkg="aruco_detect" name="drone_aruco_detect"
+  <!-- <node pkg="aruco_detect" name="drone_aruco_detect"
     type="aruco_detect" output="screen" respawn="false">
     <param name="image_transport" value="$(arg transport)"/>
     <param name="publish_images" value="true" />
@@ -29,7 +29,7 @@
     <remap from="camera/compressed" 
         to="$(arg camera1)/$(arg image)/$(arg transport)"/>
     <remap from="camera_info" to="$(arg camera1)/camera_info"/>
-  </node>
+  </node> -->
 
   <node pkg="aruco_detect" name="left_aruco_detect"
     type="aruco_detect" output="screen" respawn="false">
@@ -44,7 +44,7 @@
     <param name="verbose" value="$(arg verbose)"/>
     <remap from="camera/compressed" 
         to="$(arg camera2)/$(arg image)/$(arg transport)"/>
-    <remap from="camera_info" to="$(arg camera2)/camera_info"/>
+    <remap from="camera_info" to="$(arg camera2)/color/camera_info"/>
   </node>
 
   <node pkg="aruco_detect" name="right_aruco_detect"
@@ -60,7 +60,7 @@
     <param name="verbose" value="$(arg verbose)"/>
     <remap from="camera/compressed" 
         to="$(arg camera3)/$(arg image)/$(arg transport)"/>
-    <remap from="camera_info" to="$(arg camera3)/camera_info"/>
+    <remap from="camera_info" to="$(arg camera3)/color/camera_info"/>
   </node>
 
 </launch>
